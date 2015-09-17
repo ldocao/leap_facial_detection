@@ -47,11 +47,11 @@ replace [DNS] by the DNS adress and my-key.pem by the full path to your key. If 
 ssh -i your_key.pem ubuntu@ec2-52-8-89-42.us-west-1.compute.amazonaws.com
 ```
 
-- download [chrome extension](https://chrome.google.com/webstore/detail/cookietxt-export/lopabhfecdfhgogdbojmaicoicjekelh)
+- you need to use chrome web browser (there might be another way using other web browsers but I don't know...) . download [chrome extension](https://chrome.google.com/webstore/detail/cookietxt-export/lopabhfecdfhgogdbojmaicoicjekelh)
 
 - go to the [kaggle data page](https://www.kaggle.com/c/facial-keypoints-detection/data)
 
-- open the cookie extension module and paste the entire message into a file cookies.txt . The content should look like that:
+- open chrome browser the cookie extension module and paste the entire message into a file cookies.txt . The content should look like that:
 
 
 ```
