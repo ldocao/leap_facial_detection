@@ -21,10 +21,16 @@ I have done both, and there was still some problem. To debug, you need to do the
 - run /home/ubuntu/src/lasagne/examples/mnist.py
 - run the code found at http://deeplearning.net/software/theano/tutorial/using_gpu.html
 
-you might need to install additional libraries, following [this thread](https://github.com/wendykan/AWSGPU_DeepLearning/issues/5) :
+- you might need to install additional libraries, following [this thread](https://github.com/wendykan/AWSGPU_DeepLearning/issues/5) :
 
 sudo apt-get install libpng-dev
 sudo apt-get install libfreetype6-dev
+
+- you might also need to refresh your shared library cached :
+sudo ldconfig /usr/local/cuda-7.5/lib64 
+
+see [reference](https://www.kaggle.com/c/diabetic-retinopathy-detection/forums/t/15496/help-using-lasagne-in-ec2-theano-unable-to-detect-gpu)
+
 
 
 # In the end
