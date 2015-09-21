@@ -6,6 +6,7 @@ def setup_network():
     """Return the initialized neural network"""
     input_layer = setup_input_layer()
     hidden_layer = setup_hidden_layer()
+    output_layer = setup_output_layer()
 
     neural_network = model.Model(input_layer, hidden_layer, output_layer)
     return neural_network
