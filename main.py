@@ -16,7 +16,7 @@ plt.figure()
 
 
 ## TRAINING NEURAL NETWORK
-epoch = 0
+epoch = 1
 loss = 2 * stop_criterion #initialize so as loss > stop_criterion
 print "Start learning [epoch/loss]=", epoch, loss
 
@@ -24,14 +24,15 @@ print "Start learning [epoch/loss]=", epoch, loss
 while loss > stop_criterion:
     print "Training neural network at epoch=", epoch
 
-    #neural_network = nn.train(neural_network)
+    neural_network = nn.train(training_data, neural_network)
 
     if epoch % evaluate_loss_frequency == 0:
         loss = nn.evaluate_loss(training_data, neural_network)
         print "    loss=", loss
 
     if epoch % visualize_classifier_frequency == 0:
-        plot_decision_boundary(training_data)
+        plot_decision_boundary(training_data, neural_network,
+        	                   lambda x: nn.predict(x, neural_network))
 
 
     if epoch >= max_epochs:
@@ -42,7 +43,9 @@ while loss > stop_criterion:
 
 ## SUMMARY
 print "Final epoch / loss = ", epoch, loss
-plot_decision_boundary(training_data)
+plt.figure()
+plot_decision_boundary(training_data, neural_network,
+	                   lambda x: nn.predict(x, neural_network))
 
 
 

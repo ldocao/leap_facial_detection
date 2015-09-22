@@ -1,10 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import sklearn
+import ipdb
 
 
 
-def plot_decision_boundary(training):
+
+def plot_decision_boundary(training, neural_network, pred_func):
     """Plot the points with classifier overlay
 
     Parameters:
@@ -15,12 +17,6 @@ def plot_decision_boundary(training):
 
     X = training.coordinates
     y = training.label
-
-
-    #define here predfunc
-    clf = sklearn.linear_model.LogisticRegressionCV()
-    clf.fit(X, y)
-    pred_func = lambda x: clf.predict(x)
 
     # Set min and max values and give it some padding
     x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
