@@ -27,17 +27,19 @@ while loss > stop_criterion:
         loss = evaluate_loss(neural_network)
 
     if epoch % visualize_classifier_frequency == 0:
-    	plt.clf()
         plot_decision_boundary(training_data)
-        plt.show()
 
+
+    if epoch >= max_epochs:
+    	break
+    	
     epoch += 1
 
 
 ## SUMMARY
 print "Final epoch / loss = ", epoch, loss
 plot_decision_boundary(training_data)
-plt.show()
+
 
 
 
