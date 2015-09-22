@@ -1,20 +1,3 @@
-import plotting
-
-# Generate a dataset
-np.random.seed(0)
-X, y = sklearn.datasets.make_moons(200, noise=0.20)
-
-
-
-class Model():
-    def __init__(self, W1=0, b1=0, W2=0, b2=0):
-        self.W1 = W1
-        self.b1 = b1
-        self.W2 = W2
-        self.b2 = b2
-
-
-
 def activation_prob(x, model):
     """Return the probability from the activation function
 
@@ -38,7 +21,7 @@ def activation_prob(x, model):
     b2 = model.b2
 
     z1 = x.dot(W1) + b1
-    a1 = np.tanh(z1)
+    a1 = activation_function_input_layer(z1)
     z2 = a1.dot(W2) + b2
     exp_scores = np.exp(z2)
     probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True)
@@ -82,10 +65,7 @@ def calculate_loss(X, model):
 
 
 
-num_examples = len(X) # training set size
-nn_input_dim = 2 # input layer dimensionality
-nn_output_dim = 2 # output layer dimensionality
+#num_examples = len(X) # training set size
  
 # Gradient descent parameters (I picked these by hand)
 epsilon = 0.01 # learning rate for gradient descent
-

@@ -1,6 +1,8 @@
 import numpy as np
 import random
 import model
+from layer import Layer
+from constants import *
 
 def setup_network():
     """Return the initialized neural network"""
@@ -8,11 +10,7 @@ def setup_network():
     hidden_layer = setup_hidden_layer()
     output_layer = setup_output_layer()
 
-    neural_network = model.Model(input_layer, hidden_layer, output_layer)
-    return neural_network
-
-
-
+    return model.Model(input_layer, hidden_layer, output_layer)
 
 
 
@@ -30,10 +28,10 @@ def setup_hidden_layer():
 
 
 def setup_output_layer():
-	"""Return the output layer initialized"""
-	W2 = np.random.randn(N_HIDDEN_NODES, OUTPUT_DIMENSION) / np.sqrt(N_HIDDEN_NODES)
+    """Return the output layer initialized"""
+    W2 = np.random.randn(N_HIDDEN_NODES, OUTPUT_DIMENSION) / np.sqrt(N_HIDDEN_NODES)
     b2 = np.zeros((1, OUTPUT_DIMENSION))
-	return Layer(model.Linear(W2, b2), activation_function=model.softmax)
+    return Layer(model.Linear(W2, b2), activation_function=model.softmax)
 
 
 

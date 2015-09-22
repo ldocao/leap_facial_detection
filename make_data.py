@@ -7,7 +7,7 @@ import plotting
 
 
 class Points():
-	def __init__(coordinates, label):
+	def __init__(self, coordinates, label):
 		self.coordinates = coordinates 
 		self.label = label
 
