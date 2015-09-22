@@ -1,11 +1,13 @@
-def activation_prob(x, model):
+import numpy as np
+
+def activation_prob(x, neural_network):
     """Return the probability from the activation function
 
     Parameters:
     ----------
-    x:
+    x: Points object
 
-    model: Model object
+    neural_network: neural_network object
         Current parameters of neural network
 
 
@@ -15,47 +17,40 @@ def activation_prob(x, model):
         Probability of activation function
     """
 
-    W1 = model.W1
-    b1 = model.b1
-    W2 = model.W2
-    b2 = model.b2
-
-    z1 = x.dot(W1) + b1
-    a1 = activation_function_input_layer(z1)
-    z2 = a1.dot(W2) + b2
-    exp_scores = np.exp(z2)
-    probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True)
+    a1 = neural_network.hidden_layer.output(x)
+    probs = neural_network.output_layer.output(a1)
     return probs
 
-    
 
-def predict(x, model):
-    # Helper function to predict an output (0 or 1)
-
-    probs = activation_prob(x, model)
-    return np.argmax(probs, axis=1)
-
-
-def regularization(model, reg_lambda=0.01):
+def regularization(neural_network, reg_lambda=0.01):
     """Compute regularization term"""
     
-    W1 = model.W1
-    W2 = model.W2
+    W1 = neural_network.hidden_layer.model.a
+    W2 = neural_network.output_layer.model.b
     return reg_lambda/2 * (np.sum(np.square(W1)) + np.sum(np.square(W2)))
 
 
 
-def calculate_loss(X, model):
-    # Helper function to evaluate the total loss on the dataset    
+def evaluate_loss(points, neural_network):
+    """Return the loss value of the prediction
 
-    probs = activation_prob(X, model)
+	Parameters:
+	----------
+	training_coord: np.array
+	    coordinates of the training data points
+
+	neural_network: neural_network object
+	    current state of neural network
+	"""
+    probs = activation_prob(points.coordinates, neural_network)
     
     # Calculating the loss
-    corect_logprobs = -np.log(probs[range(num_examples), y])
-    data_loss = np.sum(corect_logprobs)
+    num_examples = len(points.coordinates) #number of points
+    correct_logprobs = -np.log(probs[range(num_examples), points.label])
+    data_loss = np.sum(correct_logprobs)
     
     # Add regulatization term to loss (optional)
-    data_loss += regularization(model)
+    data_loss += regularization(neural_network)
     return 1./num_examples * data_loss
 
 
@@ -63,9 +58,11 @@ def calculate_loss(X, model):
 
 
 
+    
 
+def predict(x, neural_network):
+    # Helper function to predict an output (0 or 1)
 
-#num_examples = len(X) # training set size
- 
-# Gradient descent parameters (I picked these by hand)
-epsilon = 0.01 # learning rate for gradient descent
+    probs = activation_prob(x, neural_network)
+    return np.argmax(probs, axis=1)
+

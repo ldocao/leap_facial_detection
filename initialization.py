@@ -16,7 +16,7 @@ def setup_network():
 
 def setup_input_layer():
 	"""Return the input layer as identity"""
-	return Layer(model.identity, activation_function=model.identity)	
+	return Layer(model.Identity(), activation_function=model.identity)	
 
 
 

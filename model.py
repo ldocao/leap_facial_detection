@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Model():
     def __init__(self, input_layer, hidden_layer, output_layer):
         self.input_layer = input_layer
@@ -13,6 +16,18 @@ class Linear():
 
     def result(self, x):
         return x.dot(self.a) + self.b
+
+
+class Softmax():
+
+    def result(self,x):
+        return softmax(x)
+
+
+class Identity():
+
+    def result(self, x):
+        return identity(x)
 
 
 def softmax(x):
