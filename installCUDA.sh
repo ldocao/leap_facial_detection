@@ -1,5 +1,9 @@
 #!/bin/bash
 
+##for convenience
+sudo apt-get install emacs
+
+##install CUDA
 sudo apt-get update
 sudo apt-get -y dist-upgrade  
 sudo apt-get install python-pip
@@ -18,7 +22,7 @@ sudo apt-get install libfreetype6-dev
 sudo ldconfig /usr/local/cuda-7.5/lib64
 sudo pip install -r https://raw.githubusercontent.com/dnouri/kfkd-tutorial/master/requirements.txt
 
-##some test
+#some test on CUDA
 python /home/ubuntu/src/lasagne/examples/mnist.py #the command above should output something like this below. Note that it enters an infinite loop and you need to hit "Ctrl-C" to break it, and get back the terminal.
 
 # Loading data...
@@ -53,3 +57,20 @@ python /home/ubuntu/src/lasagne/examples/mnist.py #the command above should outp
 #   training loss:        0.332929
 #   validation loss:      0.207362
 #   validation accuracy:      93.98 %%
+
+
+
+## install Theano
+echo -e "\n[global]\nfloatX=float32\ndevice=gpu\n[mode]=FAST_RUN\n\n[nvcc]\nfastmath=True\n\n[cuda]\nroot=/usr/local/cuda" >> ~/.theanorc 
+
+#some test on theano
+scp -i "keyname.pem" check1.py ubuntu@[DNS]:./ #first upload check1.py onto EC2 with something like:
+ssh -i "keyname.pem" ubuntu@[DNS] #log back
+python check1.py #you should get something like below:
+# Using gpu device 0: GRID K520 (CNMeM is disabled)
+# [GpuElemwise{exp,no_inplace}(<CudaNdarrayType(float32, vector)>), HostFromGpu(GpuElemwise{exp,no_inplace}.0)]
+# Looping 1000 times took 0.654080 seconds
+# Result is [ 1.23178029  1.61879349  1.52278066 ...,  2.20771813  2.29967761
+#   1.62323296]
+# Used the gpu
+
