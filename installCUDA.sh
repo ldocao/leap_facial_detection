@@ -63,7 +63,7 @@ python /home/ubuntu/src/lasagne/examples/mnist.py #the command above should outp
 ## install Theano
 echo -e "\n[global]\nfloatX=float32\ndevice=gpu\n[mode]=FAST_RUN\n\n[nvcc]\nfastmath=True\n\n[cuda]\nroot=/usr/local/cuda" >> ~/.theanorc 
 
-#some test on theano
+#check1 on theano
 scp -i "keyname.pem" check1.py ubuntu@[DNS]:./ #first upload check1.py onto EC2 with something like:
 ssh -i "keyname.pem" ubuntu@[DNS] #log back
 python check1.py #you should get something like below:
@@ -74,3 +74,15 @@ python check1.py #you should get something like below:
 #   1.62323296]
 # Used the gpu
 
+
+
+#check2 on theano
+#do the same than above with the file check2.py, you should get:
+# ubuntu@ip-172-31-12-21:~$ python check2.py 
+# Using gpu device 0: GRID K520 (CNMeM is disabled)
+# [GpuElemwise{exp,no_inplace}(<CudaNdarrayType(float32, vector)>)]
+# Looping 1000 times took 0.193634 seconds
+# Result is <CudaNdarray object at 0x7fd2995aceb0>
+# Numpy result is [ 1.23178029  1.61879349  1.52278066 ...,  2.20771813  2.29967761
+#   1.62323296]
+# Used the gpu
