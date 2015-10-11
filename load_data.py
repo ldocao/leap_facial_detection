@@ -10,6 +10,8 @@ import sklearn
 def _rescale_coordinates(target):
     """Convert coordinates to [-1,1]
 
+    Parameters:
+    ----------
     target: np.array
         all target values
     """
@@ -20,6 +22,8 @@ def _rescale_coordinates(target):
 def _as_normalized_grayscale(serie):
     """Convert to float np.array, and normalize to [0,1]
 
+    Parameters:
+    ----------
     serie: pd.Series
         list of value of pixels [0,255] of image
     """
@@ -29,6 +33,8 @@ def _as_normalized_grayscale(serie):
 def _separate_pixels(image):
     """Return an array where each pixel values has been separated
 
+    Parameters:
+    ----------
     image: pd.Series
     """
 
@@ -39,9 +45,9 @@ def _separate_pixels(image):
 
 
 def training(cols=None):
-    """Loads data from FTEST if *test* is True, otherwise from FTRAIN.
-    Pass a list of *cols* if you're only interested in a subset of the
-    target columns.
+    """Return features and target separately
+
+
     """
 
     df = pd.read_csv(os.path.expanduser(FTRAIN)) 
