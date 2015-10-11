@@ -7,16 +7,13 @@ from pandas.io.parsers import read_csv
 from sklearn.utils import shuffle
 
 
-FTRAIN = '../datasets/training.csv'
-FTEST = '../datasets/test.csv'
 
-
-def load(test=False, cols=None):
+def load(fname, cols=None):
     """Loads data from FTEST if *test* is True, otherwise from FTRAIN.
     Pass a list of *cols* if you're only interested in a subset of the
     target columns.
     """
-    fname = FTEST if test else FTRAIN
+
     df = read_csv(os.path.expanduser(fname))  # load pandas dataframe
 
     # The Image column has pixel values separated by space; convert
@@ -43,7 +40,7 @@ def load(test=False, cols=None):
     return X, y
 
 
-X, y = load()
+X, y = load(FTRAIN)
 print("X.shape == {}; X.min == {:.3f}; X.max == {:.3f}".format(
     X.shape, X.min(), X.max()))
 print("y.shape == {}; y.min == {:.3f}; y.max == {:.3f}".format(
