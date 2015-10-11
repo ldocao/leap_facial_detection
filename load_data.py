@@ -45,10 +45,7 @@ def _separate_pixels(image):
 
 
 def training(cols=None):
-    """Return features and target separately
-
-
-    """
+    """Return features and target separately"""
 
     df = pd.read_csv(os.path.expanduser(FTRAIN)) 
     df['Image'] = _separate_pixels(df['Image'])
