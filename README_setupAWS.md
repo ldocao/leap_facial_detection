@@ -7,6 +7,9 @@
 5. On left panel of "Step 1: Choose Amazon Machine Image" page, select "Community AMIs"
 6. In the search box, search for "ami-b141a2f5" and press "Select"
  - note, AMI # chosen is from following blog: http://markus.com/install-theano-on-aws/
+
+If you can't find the above AMI, you can also look for "ami-df6a8b9b".
+
 7. On page "Step 2: Choose an Instance Type", scroll down and select "GPU instances | g2.2xlarge", and then select at bottom of page "Next: Configure Instance Details"
 8. On page "Step 3: Configure Instance Details":
  - Number of instances: for now set to 1
