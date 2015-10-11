@@ -12,3 +12,7 @@
 
 Run one after the other, all the commands in installCUDA.sh
 
+# Important notes
+
+Please note that if you kill your EC2 instance, you will lose all your setup, and need to re-do all over again. You should thus plan your time accordingly.
+
