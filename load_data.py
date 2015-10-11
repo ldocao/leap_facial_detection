@@ -1,5 +1,41 @@
 ##PURPOSE: operations on raw data
 from constants import *
+import os
+import ipdb
+import pandas as pd
+import numpy as np
+import sklearn
+
+
+def _rescale_coordinates(target):
+    """Convert coordinates to [-1,1]
+
+    target: np.array
+        all target values
+    """
+
+    target = (target - HALF_SIZE_IMAGE) / HALF_SIZE_IMAGE  # scale target coordinates to [-1, 1]
+    return target.astype(np.float32)
+
+def _as_normalized_grayscale(serie):
+    """Convert to float np.array, and normalize to [0,1]
+
+    serie: pd.Series
+        list of value of pixels [0,255] of image
+    """
+    features = np.vstack(serie.values) / GRAYSCALE  # scale pixel values to [0, 1]
+    return features.astype(np.float32)
+
+def _separate_pixels(image):
+    """Return an array where each pixel values has been separated
+
+    image: pd.Series
+    """
+
+    return image.apply(lambda im: np.fromstring(im, sep=' ')) # the Image column has pixel values separated by space; convert the values to numpy arrays
+
+
+
 
 
 def training(cols=None):
@@ -8,28 +44,16 @@ def training(cols=None):
     target columns.
     """
 
-    df = read_csv(os.path.expanduser(FTRAIN))  # load pandas dataframe
+    df = pd.read_csv(os.path.expanduser(FTRAIN)) 
+    df['Image'] = _separate_pixels(df['Image'])
+    if cols: df = df[list(cols) + ['Image']]
 
-    # The Image column has pixel values separated by space; convert
-    # the values to numpy arrays:
-    df['Image'] = df['Image'].apply(lambda im: np.fromstring(im, sep=' '))
+    ##renormalisation, cleanup
+    df = df.dropna() 
+    features = _as_normalized_grayscale(df['Image'])  # scale pixel values to [0, 1]
+    target = _rescale_coordinates(df[df.columns[:-1]].values)
 
-    if cols:  # get a subset of columns
-        df = df[list(cols) + ['Image']]
-
-    print(df.count())  # prints the number of values for each column
-    df = df.dropna()  # drop all rows that have missing values in them
-
-    X = np.vstack(df['Image'].values) / 255.  # scale pixel values to [0, 1]
-    X = X.astype(np.float32)
-
-
-    y = df[df.columns[:-1]].values
-    y = (y - 48) / 48  # scale target coordinates to [-1, 1]
-    X, y = shuffle(X, y, random_state=42)  # shuffle train data
-    y = y.astype(np.float32)
-
-    return X, y
+    return sklearn.utils.shuffle(features, target, random_state=42)  # shuffle train data
 
 
 
@@ -41,7 +65,7 @@ def test(cols=None):
     target columns.
     """
 
-    df = read_csv(os.path.expanduser(FTEST))  # load pandas dataframe
+    df = pd.read_csv(os.path.expanduser(FTEST))  # load pandas dataframe
 
     # The Image column has pixel values separated by space; convert
     # the values to numpy arrays:
