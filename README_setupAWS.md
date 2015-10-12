@@ -76,4 +76,6 @@ scp -i your_key.pem cookies.txt ubuntu@ec2-52-8-89-42.us-west-1.compute.amazonaw
 ```
 
 - you have now successfully copied the kaggle cookies.txt to your EC2.
-- Now proceed to the last step by running setup.sh as defined in kaggle
+- Now proceed to the last step by downloading the kaggle files as in defined by kaggle:
+
+https://github.com/wendykan/AWSGPU_DeepLearning/blob/master/setup.sh
