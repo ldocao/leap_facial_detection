@@ -2,6 +2,7 @@ from lasagne import layers
 from lasagne.updates import nesterov_momentum
 from nolearn.lasagne import NeuralNet
 import load_data
+from constants import MAX_EPOCHS
 
 
 
@@ -23,10 +24,13 @@ net1 = NeuralNet(
     update_momentum=0.9,
 
     regression=True,  # flag to indicate we're dealing with regression problem
-    max_epochs=400,  # we want to train this many epochs
+    max_epochs=MAX_EPOCHS,  # we want to train this many epochs
     verbose=1,
     )
 
 
-X, y = load_data.training()
-net1.fit(X, y)
+def predict(test):
+    """Return prediction from test set"""
+    X, y = load_data.training()
+    net1.fit(X, y)
+    return net1.predict(test)
