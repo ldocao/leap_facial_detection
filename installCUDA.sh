@@ -2,6 +2,7 @@
 
 ##for convenience
 sudo apt-get install emacs
+sudo apt-get install unzip
 
 ##install CUDA
 sudo apt-get update
