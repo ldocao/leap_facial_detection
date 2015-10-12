@@ -12,5 +12,5 @@
 Run one after the other, all the commands in installCUDA.sh
 
 # Important notes
-Please note that if you kill your EC2 instance, you will lose all your setup, and need to re-do all over again. You should thus plan your time accordingly.
-
+- Please note that if you kill your EC2 instance, you will lose all your setup, and need to re-do all over again. You should thus plan your time accordingly.
+- Sometimes, your script can be very slow to run. This may be due to very fast Interrupt Request (IRQ). You can check that with the top command, and notice that ksoftirqd/0 is eating up all your CPU. I'm not expert enough to fix this properly, but I did notice that by rebooting the EC2 server, the problem goes away. Anybody else has this problem ?

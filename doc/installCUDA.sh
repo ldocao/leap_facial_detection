@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ##for convenience
-sudo apt-get install emacs
+sudo apt-get -y install emacs
+sudo apt-get install unzip
 
 ##install CUDA
 sudo apt-get update
@@ -17,7 +18,7 @@ echo -e "\nexport PATH=/usr/local/cuda/bin:$PATH\n\nexport LD_LIBRARY_PATH=/usr/
 sudo reboot  #this will log you out. wait for couple of minutes, then log back with ssh
 
 
-sudo apt-get install libpng-dev 
+sudo apt-get -y install libpng-dev
 sudo apt-get install libfreetype6-dev
 sudo ldconfig /usr/local/cuda-7.5/lib64
 sudo pip install -r https://raw.githubusercontent.com/dnouri/kfkd-tutorial/master/requirements.txt
