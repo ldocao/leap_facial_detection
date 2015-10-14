@@ -6,6 +6,13 @@ import numpy as np
 import sklearn
 
 
+
+def feature_name():
+    """Return a list of all feature names"""
+    df = pd.read_csv(os.path.expanduser(FTRAIN),nrows=1)
+    return df.columns.values[:-1]
+
+
 def _rescale_coordinates(target):
     """Convert coordinates to [-1,1]
 
