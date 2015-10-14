@@ -5,7 +5,6 @@ import load_data
 from constants import MAX_EPOCHS
 
 
-
 net1 = NeuralNet(
     layers=[  # three layers: one hidden layer
         ('input', layers.InputLayer),
