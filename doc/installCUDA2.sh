@@ -69,3 +69,19 @@ python check1.py #you should get something like below:
 # Numpy result is [ 1.23178029  1.61879349  1.52278066 ...,  2.20771813  2.29967761
 #   1.62323296]
 # Used the gpu
+
+
+
+# download data files and save them under /data
+cd ~/
+mkdir data
+cd data
+wget -x --load-cookies ~/cookies.txt https://www.kaggle.com/c/facial-keypoints-detection/download/training.zip
+wget -x --load-cookies ~/cookies.txt https://www.kaggle.com/c/facial-keypoints-detection/download/test.zip
+wget -x --load-cookies ~/cookies.txt https://www.kaggle.com/c/facial-keypoints-detection/download/SampleSubmission.csv
+wget -x --load-cookies ~/cookies.txt https://www.kaggle.com/c/facial-keypoints-detection/download/IdLookupTable.csv
+mv www.kaggle.com/c/facial-keypoints-detection/download/* .
+sudo apt-get install unzip
+unzip training.zip
+unzip test.zip
+rm -rf www.kaggle.com/
