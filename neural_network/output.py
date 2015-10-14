@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import single_hidden_layer as nn
 import load_data
-from constants import FID, HALF_SIZE_IMAGE
+from constants import FID, HALF_SIZE_IMAGE, SIZE_IMAGE
 import ipdb
 
 
@@ -19,8 +19,8 @@ def prepare_for_output(results):
     """Convert numpy array to dataframe"""
 
     ##convert to pixels
-    results2 = results*float(HALF_SIZE_IMAGE) + float(HALF_SIZE_IMAGE)
-    ipdb.set_trace()
+    results = results*float(HALF_SIZE_IMAGE) + float(HALF_SIZE_IMAGE)
+
     ## refactor data
     header = ["RowId", "ImageId", "FeatureName", "Location"]
     n_images = 1783
@@ -31,7 +31,9 @@ def prepare_for_output(results):
     ##nested loops are not efficient at all, but who cares
     for image in xrange(n_images):
         for feat in xrange(n_features):
-            print float(rowid) / (n_images*n_features) * 100., "%"
+            print float(rowid) / (n_images*n_features) * 100., "%" 
+            if results[image,feat] > SIZE_IMAGE:
+                print "Prediction greater than SIZE_IMAGE"
             df.loc[rowid,:] = [rowid, 
                                image+1,
                                features_name[feat],
