@@ -1,23 +1,5 @@
 #!/bin/bash
 
-##for convenience
-sudo apt-get -y install emacs
-sudo apt-get install unzip
-
-##install CUDA
-sudo apt-get update
-sudo apt-get -y dist-upgrade  
-sudo apt-get install python-pip
-sudo apt-get install -y gcc g++ gfortran build-essential git wget linux-image-generic libopenblas-dev python-dev python-pip python-nose python-numpy python-scipy 
-sudo pip install --upgrade --no-deps git+git://github.com/Theano/Theano.git  
-sudo wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.0-28_amd64.deb  
-sudo dpkg -i cuda-repo-ubuntu1404_7.0-28_amd64.deb 
-sudo apt-get update
-sudo apt-get install -y cuda  
-echo -e "\nexport PATH=/usr/local/cuda/bin:$PATH\n\nexport LD_LIBRARY_PATH=/usr/local/cuda/lib64" >> .bashrc 
-sudo reboot  #this will log you out. wait for couple of minutes, then log back with ssh
-
-
 sudo apt-get -y install libpng-dev
 sudo apt-get install libfreetype6-dev
 sudo ldconfig /usr/local/cuda-7.5/lib64
